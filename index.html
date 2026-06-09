@@ -1,147 +1,264 @@
-/* ============================================================
-   MAIN.JS — Anurag Tripathi Portfolio
-   Sections:
-     1. Nav — scrolled border + active link highlight
-     2. Hamburger — mobile menu toggle
-     3. Scroll Reveal — IntersectionObserver with stagger
-     4. Smooth anchor offset — accounts for fixed nav height
-   ============================================================ */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Anurag Tripathi — Geoscience student at Tri-Chandra Multiple Campus, BSc Geology. Researcher, mapper, and geophysics enthusiast from Nepal." />
+  <title>Anurag Tripathi — Geoscience &amp; Geology</title>
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
 
-/* ── 1. NAV SCROLLED STATE + ACTIVE LINK ────────────────────── */
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-const navbar   = document.getElementById('navbar');
-const navLinks = document.querySelectorAll('.nav-links a');
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-/**
- * Mark nav as scrolled (shows bottom border) when page
- * is scrolled past 30 px.
- */
-function handleNavScroll() {
-  navbar.classList.toggle('scrolled', window.scrollY > 30);
-}
+  <!-- ======================================================
+       NAV
+  ====================================================== -->
+  <nav id="navbar">
+    <a class="nav-logo" href="#hero">AT /</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-/**
- * Highlight the nav link whose section is currently
- * in the upper third of the viewport.
- */
-function updateActiveLink() {
-  const scrollMid = window.scrollY + window.innerHeight * 0.35;
+  <!-- ======================================================
+       HERO
+  ====================================================== -->
+  <section id="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">BSc Geology · Tri-Chandra Multiple Campus · Kathmandu</p>
+      <h1 class="hero-name">
+        Anurag<br>
+        <em>Tripathi</em>
+      </h1>
+      <p class="hero-tagline">
+        Geoscience student decoding Nepal's rocks, faults, and landscapes —
+        through field surveys, GIS, and geophysical analysis.
+      </p>
+      <nav class="hero-nav" aria-label="Jump to section">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
 
-  navLinks.forEach(link => {
-    const targetId = link.getAttribute('href').slice(1); // strip '#'
-    const section  = document.getElementById(targetId);
-    if (!section) return;
+    <div class="hero-photo-wrap">
+      <img
+        class="hero-photo"
+        src="https://tripathianurag.com.np/assets/images/profile1.png"
+        alt="Anurag Tripathi"
+        onerror="this.outerHTML='<div class=\'hero-photo-placeholder\'>Photo</div>'"
+      />
+    </div>
+  </section>
 
-    const { offsetTop, offsetHeight } = section;
-    const inView =
-      scrollMid >= offsetTop &&
-      scrollMid < offsetTop + offsetHeight;
+  <!-- ======================================================
+       ABOUT
+  ====================================================== -->
+  <section id="about" class="section">
+    <div class="container">
+      <p class="s-label reveal">Who I am</p>
+      <h2 class="s-title reveal">A student of <em>Earth's story</em></h2>
+      <div class="s-divider reveal"></div>
 
-    link.classList.toggle('active', inView);
-  });
-}
+      <div class="about-grid">
+        <div class="about-img-wrap reveal">
+          <img
+            class="about-img"
+            src="https://tripathianurag.com.np/assets/images/profile1.png"
+            alt="Anurag Tripathi — portrait"
+            onerror="this.style.display='none'"
+          />
+        </div>
 
-window.addEventListener('scroll', () => {
-  handleNavScroll();
-  updateActiveLink();
-}, { passive: true });
+        <div class="about-body reveal">
+          <p>
+            I'm a geoscience student at Tri-Chandra Multiple Campus, currently pursuing a
+            Bachelor of Science in Geology. My work spans mineralogy, petrology, structural
+            geology, sedimentology, and geophysics.
+          </p>
+          <p>
+            I'm passionate about uncovering the Earth's history and applying geological
+            knowledge to real-world challenges — from natural resource management to
+            environmental sustainability across Nepal's dynamic landscape.
+          </p>
 
-// Run once on load
-handleNavScroll();
-updateActiveLink();
+          <div class="meta-grid">
+            <div class="meta-item">
+              <span class="meta-label">Age</span>
+              <span class="meta-value">21</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Based in</span>
+              <span class="meta-value">Kathmandu, Nepal</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Phone</span>
+              <span class="meta-value">+977-9841939544</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Email</span>
+              <span class="meta-value meta-value--sm">anurag.tripathi2072@gmail.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ======================================================
+       EDUCATION
+  ====================================================== -->
+  <section id="education" class="section">
+    <div class="container">
+      <p class="s-label reveal">Academic path</p>
+      <h2 class="s-title reveal">My <em>Education</em></h2>
+      <div class="s-divider reveal"></div>
 
-/* ── 2. HAMBURGER MENU (MOBILE) ─────────────────────────────── */
+      <div class="edu-list">
+        <div class="edu-item reveal">
+          <div class="edu-date">2022 – 2026 <span class="edu-status">Running</span></div>
+          <div class="edu-content">
+            <div class="edu-degree">BSc. Geology</div>
+            <div class="edu-place">Tri-Chandra Multiple Campus, Ghantaghar, Kathmandu</div>
+          </div>
+        </div>
 
-const hamburger    = document.getElementById('hamburger');
-const mobileLinks  = document.querySelector('.nav-links');
+        <div class="edu-item reveal">
+          <div class="edu-date">2020 – 2022 <span class="edu-status">Completed</span></div>
+          <div class="edu-content">
+            <div class="edu-degree">Higher Secondary (High School)</div>
+            <div class="edu-place">Premier College, Baneshwor, Kathmandu</div>
+          </div>
+        </div>
 
-hamburger.addEventListener('click', () => {
-  const isOpen = mobileLinks.classList.toggle('open');
-  hamburger.classList.toggle('open', isOpen);
-  hamburger.setAttribute('aria-expanded', String(isOpen));
-});
+        <div class="edu-item reveal">
+          <div class="edu-date">2018 – 2020 <span class="edu-status">Completed</span></div>
+          <div class="edu-content">
+            <div class="edu-degree">SEE (Secondary Education Examination)</div>
+            <div class="edu-place">Monastic Public English School, Kadaghari, Kathmandu</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-// Close menu when a link is tapped
-mobileLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileLinks.classList.remove('open');
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-  });
-});
+  <!-- ======================================================
+       EXPERIENCE
+  ====================================================== -->
+  <section id="experience" class="section">
+    <div class="container">
+      <p class="s-label reveal">What I've done</p>
+      <h2 class="s-title reveal">Work &amp; <em>Experience</em></h2>
+      <div class="s-divider reveal"></div>
 
-// Close menu when tapping outside
-document.addEventListener('click', e => {
-  if (!navbar.contains(e.target)) {
-    mobileLinks.classList.remove('open');
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-  }
-});
+      <div class="exp-grid">
 
+        <div class="exp-card reveal">
+          <span class="exp-badge">Fieldwork</span>
+          <h3 class="exp-title">Field Mapping — Dhading, Malekhu</h3>
+          <p class="exp-desc">3rd year field mapping over two weeks — geological documentation of rock formations and structural features in the Dhading–Malekhu corridor.</p>
+        </div>
 
-/* ── 3. SCROLL REVEAL ────────────────────────────────────────── */
+        <div class="exp-card reveal">
+          <span class="exp-badge">Research</span>
+          <h3 class="exp-title">Petrological Analysis</h3>
+          <p class="exp-desc">Analysis of rock samples from Chandragiri, Godwari, and Shivapuri. Thin-section and macro-scale characterisation of lithologies.</p>
+        </div>
 
-/**
- * Elements with class="reveal" start invisible (set via CSS).
- * When they enter the viewport they receive class="visible"
- * which triggers the CSS fade-up transition.
- *
- * Siblings inside the same parent are staggered by 80 ms each
- * so a row of cards animates in sequence rather than all at once.
- */
+        <div class="exp-card reveal">
+          <span class="exp-badge">Research</span>
+          <h3 class="exp-title">Land Subsidence Study — Biratnagar</h3>
+          <p class="exp-desc">Study of land subsidence in Biratnagar Metropolitan City — combining field observation, GIS, and geotechnical assessment.</p>
+        </div>
 
-const revealEls = document.querySelectorAll('.reveal');
+        <div class="exp-card reveal">
+          <span class="exp-badge">Internship</span>
+          <h3 class="exp-title">Graphic Design — Sunrise Printing Press</h3>
+          <p class="exp-desc">6-month internship using Photoshop, Illustrator, and InDesign for print and digital media production.</p>
+        </div>
 
-/** Returns the stagger index of an element among its
- *  `.reveal` siblings within the same parent. */
-function getSiblingIndex(el) {
-  const siblings = Array.from(el.parentElement.querySelectorAll(':scope > .reveal'));
-  return siblings.indexOf(el);
-}
+        <div class="exp-card reveal">
+          <span class="exp-badge">Academic</span>
+          <h3 class="exp-title">Seminars &amp; Conferences</h3>
+          <p class="exp-desc">Nepal Geological Association events, DMG programs, SEG Student Chapter Nepal, and courses from MIT and Coursera.</p>
+        </div>
 
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
+        <div class="exp-card reveal">
+          <span class="exp-badge">Certification</span>
+          <h3 class="exp-title">QGIS Training — Broadway Infosys</h3>
+          <p class="exp-desc">Hands-on QGIS training alongside a Graphic Design certificate. Applied to real geospatial datasets in Kathmandu valley.</p>
+        </div>
 
-    const el    = entry.target;
-    const index = getSiblingIndex(el);
-    const delay = index * 80; // ms between siblings
+      </div>
+    </div>
+  </section>
 
-    setTimeout(() => el.classList.add('visible'), delay);
-    revealObserver.unobserve(el);
-  });
-}, {
-  threshold: 0.12,
-  rootMargin: '0px 0px -40px 0px'
-});
+  <!-- ======================================================
+       CONTACT
+  ====================================================== -->
+  <section id="contact" class="section">
+    <div class="container">
+      <p class="s-label reveal">Say hello</p>
+      <h2 class="s-title reveal">Get in <em>Touch</em></h2>
+      <div class="s-divider reveal"></div>
 
-revealEls.forEach(el => revealObserver.observe(el));
+      <div class="contact-inner">
+        <p class="contact-intro reveal">
+          Whether it's joint fieldwork, research collaboration, academic discussion on Nepalese
+          geology, or anything geoscience — I'm always glad to connect.
+        </p>
 
+        <ul class="contact-list reveal">
+          <li class="contact-row">
+            <i class="fa-solid fa-phone"></i>
+            <a href="tel:+9779841939544">+977-9841939544</a>
+          </li>
+          <li class="contact-row">
+            <i class="fa-solid fa-envelope"></i>
+            <a href="mailto:anurag.tripathi2072@gmail.com">anurag.tripathi2072@gmail.com</a>
+          </li>
+          <li class="contact-row">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Kavre / Kathmandu, Nepal</span>
+          </li>
+        </ul>
 
-/* ── 4. SMOOTH ANCHOR SCROLL WITH NAV OFFSET ────────────────── */
+        <div class="socials reveal">
+          <a href="https://github.com/anuragtripat"          target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/anurag-tripathi-737at/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://x.com/anurag737geo"               target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=100015470682143" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.youtube.com/@anuragtripathi9580" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-/**
- * Native scroll-behavior: smooth doesn't account for
- * the fixed navbar height. This intercepts anchor clicks
- * and adds the navbar's height as an offset.
- */
+  <!-- ======================================================
+       FOOTER
+  ====================================================== -->
+  <footer id="footer">
+    <span class="footer-copy">© 2026 Anurag Tripathi · Nepal</span>
+    <span class="footer-right">BSc Geology · Tri-Chandra Multiple Campus</span>
+  </footer>
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', e => {
-    const targetId = anchor.getAttribute('href');
-    if (targetId === '#') return;
-
-    const target = document.querySelector(targetId);
-    if (!target) return;
-
-    e.preventDefault();
-
-    const navHeight = navbar.offsetHeight;
-    const targetTop = target.getBoundingClientRect().top + window.scrollY - navHeight - 8;
-
-    window.scrollTo({ top: targetTop, behavior: 'smooth' });
-  });
-});
+  <!-- Script -->
+  <script src="main.js"></script>
+</body>
+</html>
