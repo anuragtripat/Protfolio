@@ -658,3 +658,17 @@ body {
     transition: none;
   }
 }
+/* Experience card link */
+.exp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s;
+  text-decoration: none;
+  word-break: break-all;
+}
+.exp-link:hover { opacity: 0.7; }
